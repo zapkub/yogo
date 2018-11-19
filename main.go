@@ -8,4 +8,6 @@ import (
 func main() {
 	ctx := context.CreateContext()
 	server.CreateServerInstance(ctx)
+
+	context.Config{}
 }

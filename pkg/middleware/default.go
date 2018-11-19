@@ -9,5 +9,5 @@ type context interface {
 // YogoMiddleware base type of middleware
 // implmeentation in Yoyo
 type YogoMiddleware interface {
-	Handler(ctx context) func(c *gin.Context)
+	Handler() func(c *gin.Context)
 }

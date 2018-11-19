@@ -2,7 +2,9 @@ package middleware
 
 import "github.com/gin-gonic/gin"
 
-type sessionMiddleware struct{}
+type sessionMiddleware struct {
+	context context
+}
 
 // Session user session information
 type Session struct {
@@ -10,8 +12,9 @@ type Session struct {
 	ExpireIn int32
 }
 
-func (s sessionMiddleware) Handler(ctx context) func(c *gin.Context) {
+func (s sessionMiddleware) Handler() func(c *gin.Context) {
 	return func(c *gin.Context) {
+
 		session := &Session{
 			ID:       "test",
 			ExpireIn: 30,
@@ -23,8 +26,10 @@ func (s sessionMiddleware) Handler(ctx context) func(c *gin.Context) {
 
 // CreateSessionMiddleware create a middleware to
 // use to validate session in request header
-func CreateSessionMiddleware() YogoMiddleware {
-	return sessionMiddleware{}
+func CreateSessionMiddleware(ctx context) YogoMiddleware {
+	return sessionMiddleware{
+		context: ctx,
+	}
 }
 
 // GetSessionFromRequestContext return Session data

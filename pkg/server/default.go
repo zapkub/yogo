@@ -15,16 +15,13 @@ type YogoServerMiddlewares struct {
 
 type context interface {
 	Middlewares() YogoServerMiddlewares
-	Version() string
 }
 
 // CreateServerInstance factory func
 // for create new server
 func CreateServerInstance(ctx context) {
-	fmt.Println(ctx.Version())
-
 	r := gin.Default()
-	r.Use(ctx.Middlewares().SessionTokenValidate.Handler(ctx))
+	r.Use(ctx.Middlewares().SessionTokenValidate.Handler())
 
 	r.GET("/version", func(c *gin.Context) {
 		user := middleware.GetSessionFromRequestContext(c)
