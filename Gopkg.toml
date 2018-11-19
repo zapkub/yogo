@@ -40,3 +40,7 @@
 [[constraint]]
   name = "github.com/apsdehal/go-logger"
   version = "1.2.0"
+
+[[constraint]]
+  name = "github.com/99designs/gqlgen"
+  version = "0.6.0"

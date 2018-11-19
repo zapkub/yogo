@@ -3,7 +3,7 @@ package middleware
 import "github.com/gin-gonic/gin"
 
 type sessionMiddleware struct {
-	context context
+	context container
 }
 
 // Session user session information
@@ -26,7 +26,7 @@ func (s sessionMiddleware) Handler() func(c *gin.Context) {
 
 // CreateSessionMiddleware create a middleware to
 // use to validate session in request header
-func CreateSessionMiddleware(ctx context) YogoMiddleware {
+func CreateSessionMiddleware(ctx container) YogoMiddleware {
 	return sessionMiddleware{
 		context: ctx,
 	}

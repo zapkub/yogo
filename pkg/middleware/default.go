@@ -2,7 +2,7 @@ package middleware
 
 import "github.com/gin-gonic/gin"
 
-type context interface {
+type container interface {
 	Version() string
 }
 

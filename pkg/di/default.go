@@ -1,8 +1,10 @@
-package context
+package di
 
 import (
+	"fmt"
 	"yogo/pkg/database"
 	"yogo/pkg/middleware"
+	"yogo/pkg/models"
 	"yogo/pkg/server"
 
 	"github.com/caarlos0/env"
@@ -16,7 +18,8 @@ type YogoContext struct {
 	version        string
 	middlewares    server.YogoServerMiddlewares
 	databaseConfig *database.Config
-	db             *mongo.Client
+	db             *mongo.Database
+	models         *models.Models
 }
 
 // Version return string of current API version
@@ -33,17 +36,19 @@ func (c *YogoContext) Middlewares() server.YogoServerMiddlewares {
 // DatabaseConfig provide config from .env to
 // database factory
 func (c *YogoContext) DatabaseConfig() database.Config {
-	if c.databaseConfig != nil {
+	if c.databaseConfig == nil {
 		panic("DatabaseConfig not found")
 	}
 	return *c.databaseConfig
 }
 
 // DB database connection instance
-func (c *YogoContext) DB() *mongo.Client {
-	if c.db != nil {
+func (c *YogoContext) DB() *mongo.Database {
+	if c.db == nil {
+		fmt.Println("Create DB Connection...")
 		mongoDBConnection, err := database.CreateMongoDBClient(c)
 		if err != nil {
+			fmt.Printf("Create db connection error")
 			panic(err)
 		}
 		c.db = mongoDBConnection
@@ -51,10 +56,20 @@ func (c *YogoContext) DB() *mongo.Client {
 	return c.db
 }
 
-// CreateContext create new YogoContext
+// Models singleton models instance
+func (c *YogoContext) Models() models.Models {
+
+	if c.models == nil {
+		c.models = models.CreateNewModels(c)
+	}
+
+	return *c.models
+}
+
+// CreateDependenciesContainer create new YogoContext
 // this context will use as main context
 // dependency as production staging
-func CreateContext() *YogoContext {
+func CreateDependenciesContainer() *YogoContext {
 	var mainContext *YogoContext
 
 	middlewares := server.YogoServerMiddlewares{
@@ -76,5 +91,6 @@ func CreateContext() *YogoContext {
 		databaseConfig: &databaseConfig,
 	}
 
+	mainContext.DB()
 	return mainContext
 }

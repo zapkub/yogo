@@ -2,12 +2,24 @@ package models
 
 import "github.com/mongodb/mongo-go-driver/mongo"
 
-// YogoModel base Model to use
+// YogoDocument base Model to use
 // when mutate data
-type YogoModel interface {
+type YogoDocument interface {
 	Save()
 }
 
-type context interface {
-	DB() *mongo.Client
+type container interface {
+	DB() *mongo.Database
+}
+
+// Models todo
+type Models struct {
+	UserModel UserModel
+}
+
+// CreateNewModels Todo
+func CreateNewModels(c container) *Models {
+	return &Models{
+		UserModel: CreateUserModel(c),
+	}
 }

@@ -1,13 +1,13 @@
 package main
 
 import (
-	"yogo/pkg/context"
+	"yogo/pkg/di"
 	"yogo/pkg/server"
 )
 
 func main() {
-	ctx := context.CreateContext()
-	server.CreateServerInstance(ctx)
 
-	context.Config{}
+	ctx := di.CreateDependenciesContainer()
+	r := server.CreateServerInstance(ctx)
+	r.Run(":3000")
 }

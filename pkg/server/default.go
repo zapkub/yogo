@@ -1,10 +1,11 @@
 package server
 
 import (
-	"fmt"
 	"yogo/pkg/middleware"
+	"yogo/pkg/models"
 
 	"github.com/gin-gonic/gin"
+	"github.com/mongodb/mongo-go-driver/bson/objectid"
 )
 
 // YogoServerMiddlewares is middleware
@@ -13,21 +14,28 @@ type YogoServerMiddlewares struct {
 	SessionTokenValidate middleware.YogoMiddleware
 }
 
-type context interface {
+type container interface {
 	Middlewares() YogoServerMiddlewares
+	Models() models.Models
 }
 
 // CreateServerInstance factory func
 // for create new server
-func CreateServerInstance(ctx context) {
+func CreateServerInstance(ctx container) *gin.Engine {
 	r := gin.Default()
 	r.Use(ctx.Middlewares().SessionTokenValidate.Handler())
 
 	r.GET("/version", func(c *gin.Context) {
-		user := middleware.GetSessionFromRequestContext(c)
-		fmt.Println(user)
-		c.String(200, user.ID)
+		userModel := ctx.Models().UserModel
+		user := userModel.Create()
+		user.Email = "rungsikorn@me.com"
+		result, err := user.Save()
+		if err != nil {
+			panic(err)
+		}
+
+		c.String(200, result.(objectid.ObjectID).Hex())
 	})
 
-	r.Run(":8080")
+	return r
 }
