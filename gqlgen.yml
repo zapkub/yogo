@@ -1,0 +1,17 @@
+# .gqlgen.yml example
+#
+# Refer to https://gqlgen.com/config/
+# for detailed .gqlgen.yml documentation.
+
+schema:
+- schema.graphql
+exec:
+  filename: ./pkg/graphql/generated.go
+  package: graphql
+model:
+  filename: ./pkg/models/generated.go
+  package: models
+
+models:
+  User:
+     model: yogo/pkg/models.UserDocument

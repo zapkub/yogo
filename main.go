@@ -6,7 +6,6 @@ import (
 )
 
 func main() {
-
 	ctx := di.CreateDependenciesContainer()
 	r := server.CreateServerInstance(ctx)
 	r.Run(":3000")

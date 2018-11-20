@@ -12,8 +12,9 @@ import (
 
 // UserDocument basic user data
 type UserDocument struct {
-	ID         objectid.ObjectID
-	Email      string
+	ID         objectid.ObjectID `json:"id"`
+	Name       string            `json:"name"`
+	Email      string            `json:"email"`
 	collection *mongo.Collection
 }
 

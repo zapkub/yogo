@@ -1,0 +1,23 @@
+directive @hasRole(role: Role!) on FIELD_DEFINITION
+enum Role {
+    ADMIN
+    USER
+}
+
+type User {
+  id: ID!
+  name: String!
+  email: String!
+}
+
+type Query {
+  version: String!
+  users: [User!]!
+}
+
+type Mutation {
+  ping: Boolean!
+
+
+  deleteUserByID: User @hasRole(role: ADMIN)
+}

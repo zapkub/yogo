@@ -2,10 +2,10 @@
 
 
 [[projects]]
+  branch = "master"
   name = "github.com/99designs/gqlgen"
-  packages = [".","cmd","codegen","codegen/templates","graphql","graphql/introspection","internal/gopath","internal/imports"]
-  revision = "6f486bde038887adf67c3e3766624ef111ea95cf"
-  version = "v0.6.0"
+  packages = ["complexity","graphql","graphql/introspection","handler"]
+  revision = "f7932b40ee0f75b35428af917cd05193b7f3414f"
 
 [[projects]]
   name = "github.com/agnivade/levenshtein"
@@ -50,6 +50,18 @@
   revision = "2e65f85255dbc3072edf28d6b5b8efc472979f5a"
 
 [[projects]]
+  name = "github.com/gorilla/websocket"
+  packages = ["."]
+  revision = "66b9c49e59c6c48f0ffce28c2d8b8a5678502c6d"
+  version = "v1.4.0"
+
+[[projects]]
+  name = "github.com/hashicorp/golang-lru"
+  packages = [".","simplelru"]
+  revision = "20f1fb78b0740ba8c3cb143a61e86ba5c8669768"
+  version = "v0.5.0"
+
+[[projects]]
   name = "github.com/json-iterator/go"
   packages = ["."]
   revision = "1624edc4454b8682399def8740d46db5e4362ba4"
@@ -80,22 +92,10 @@
   version = "v0.0.18"
 
 [[projects]]
-  name = "github.com/pkg/errors"
-  packages = ["."]
-  revision = "645ef00459ed84a119197bfb8d8205042c6df63d"
-  version = "v0.8.0"
-
-[[projects]]
   name = "github.com/ugorji/go"
   packages = ["codec"]
   revision = "b4c50a2b199d93b13dc15e78929cfb23bfdf21ab"
   version = "v1.1.1"
-
-[[projects]]
-  name = "github.com/urfave/cli"
-  packages = ["."]
-  revision = "cfb38830724cc34fedffe9a2a29fb54fa9169cd1"
-  version = "v1.20.0"
 
 [[projects]]
   branch = "master"
@@ -131,19 +131,13 @@
   branch = "master"
   name = "golang.org/x/sys"
   packages = ["unix"]
-  revision = "93218def8b18e66adbdab3eca8ec334700329f1f"
+  revision = "ec83556a53fe16b65c452a104ea9d1e86a671852"
 
 [[projects]]
   name = "golang.org/x/text"
   packages = ["internal/gen","internal/triegen","internal/ucd","transform","unicode/cldr","unicode/norm"]
   revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
   version = "v0.3.0"
-
-[[projects]]
-  branch = "master"
-  name = "golang.org/x/tools"
-  packages = ["go/ast/astutil","go/buildutil","go/internal/cgo","go/loader","imports","internal/fastwalk","internal/gopathwalk"]
-  revision = "70b12541d3fecd5bcb3e66a8234612737629313b"
 
 [[projects]]
   name = "gopkg.in/go-playground/validator.v8"
@@ -160,6 +154,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "ff78ada410803d9784a4617800308c7b345ffb663f712e300967968a0c9cebcd"
+  inputs-digest = "a8f40bb99ca7049a5e986bbed1122337d3946296b89013dfa443d9b547adfe31"
   solver-name = "gps-cdcl"
   solver-version = 1

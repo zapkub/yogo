@@ -1,6 +1,7 @@
 package server
 
 import (
+	"net/http"
 	"yogo/pkg/middleware"
 	"yogo/pkg/models"
 
@@ -17,6 +18,9 @@ type YogoServerMiddlewares struct {
 type container interface {
 	Middlewares() YogoServerMiddlewares
 	Models() models.Models
+
+	// GraphQLHandler must return GraphQL endpoint handler and playground handler
+	GraphQLHandler() (http.HandlerFunc, http.HandlerFunc)
 }
 
 // CreateServerInstance factory func
@@ -35,6 +39,15 @@ func CreateServerInstance(ctx container) *gin.Engine {
 		}
 
 		c.String(200, result.(objectid.ObjectID).Hex())
+	})
+
+	graphql, playground := ctx.GraphQLHandler()
+	r.GET("/graphql", func(c *gin.Context) {
+		playground.ServeHTTP(c.Writer, c.Request)
+	})
+
+	r.POST("/graphql", func(c *gin.Context) {
+		graphql.ServeHTTP(c.Writer, c.Request)
 	})
 
 	return r
