@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+    "strictFunctionTypes": true,
+    "types": ["reflect-metadata", "jest", "node"],
+    "experimentalDecorators": true,
+    "noUnusedLocals": true,
+    "allowJs": true,
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "strictNullChecks": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "target": "es2015",
+    "lib": ["es2015", "dom"],
+    "plugins": [
+      {
+        "name": "typescript-styled-plugin"
+      }
+    ]
+  },
+  "exclude": ["coverage", "jest-stare"]
+}

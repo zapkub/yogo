@@ -8,6 +8,7 @@ import (
 	"yogo/pkg/middleware"
 	"yogo/pkg/models"
 	"yogo/pkg/server"
+	"yogo/pkg/views"
 
 	"github.com/caarlos0/env"
 	"github.com/mongodb/mongo-go-driver/mongo"
@@ -18,13 +19,17 @@ import (
 // that satisfy every package
 type YogoContainer struct {
 	version        string
-	middlewares    server.YogoServerMiddlewares
 	databaseConfig *database.Config
-	db             *mongo.Database
-	models         *models.Models
+	viewConfig     *views.Config
+
+	middlewares server.YogoServerMiddlewares
+
+	db     *mongo.Database
+	models *models.Models
 
 	graphQLPlaygroundHandler http.HandlerFunc
 	graphQLEndpointHandler   http.HandlerFunc
+	viewsHandler             http.HandlerFunc
 }
 
 // Version return string of current API version
@@ -80,6 +85,25 @@ func (c *YogoContainer) GraphQLHandler() (http.HandlerFunc, http.HandlerFunc) {
 	}
 
 	return c.graphQLEndpointHandler, c.graphQLPlaygroundHandler
+}
+
+func (c *YogoContainer) ViewConfig() views.Config {
+	if c.viewConfig == nil {
+		c.viewConfig = &views.Config{}
+		err := env.Parse(c.viewConfig)
+		if err != nil {
+			panic(err)
+		}
+	}
+	return *c.viewConfig
+}
+
+func (c *YogoContainer) ViewsHandler() http.HandlerFunc {
+	if c.viewsHandler == nil {
+		c.viewsHandler = views.CreateViewsHandler(c)
+
+	}
+	return c.viewsHandler
 }
 
 // CreateDependenciesContainer create new YogoContext

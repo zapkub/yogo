@@ -21,6 +21,7 @@ type container interface {
 
 	// GraphQLHandler must return GraphQL endpoint handler and playground handler
 	GraphQLHandler() (http.HandlerFunc, http.HandlerFunc)
+	ViewsHandler() http.HandlerFunc
 }
 
 // CreateServerInstance factory func
@@ -48,6 +49,10 @@ func CreateServerInstance(ctx container) *gin.Engine {
 
 	r.POST("/graphql", func(c *gin.Context) {
 		graphql.ServeHTTP(c.Writer, c.Request)
+	})
+
+	r.NoRoute(func(c *gin.Context) {
+		ctx.ViewsHandler().ServeHTTP(c.Writer, c.Request)
 	})
 
 	return r
