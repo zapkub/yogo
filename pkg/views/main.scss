@@ -1,0 +1,15 @@
+@import "../../node_modules/bootstrap/scss/bootstrap";
+@import "./scss/auroral.scss";
+
+
+.sky-container {
+  display: block; 
+  position: fixed;
+  overflow: hidden;
+  min-height: 100vh;
+  min-width: 100vw;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+}

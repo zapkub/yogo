@@ -126,15 +126,14 @@ func CreateDependenciesContainer() *YogoContainer {
 	if err != nil {
 		panic("Config parser failed...")
 	}
-
 	// Create new YogoContext
+	// try to add something and then
 	// and encapsulate init data
 	mainContext = &YogoContainer{
 		version:        "1.0.0",
 		middlewares:    middlewares,
 		databaseConfig: &databaseConfig,
 	}
-
 	mainContext.DB()
 	return mainContext
 }

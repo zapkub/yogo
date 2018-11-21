@@ -1,0 +1,21 @@
+$bk1: #00d5de;
+$theme-colors: (
+  "primary": rgb(255, 200, 6),
+  "danger": #ff4136,
+  "navbar": $bk1,
+
+  "fill1": #B689C8,
+  "fill2": #D19fe3,
+  "border1": #a76bc2,
+  "highlight1": #c9aad0,
+  "highlight2": #9561a8,
+  "contrast1": #263773,
+  "contrast2": #ed438a,
+  "contrast3": #662d8a,
+  "darken1": #131f46
+  
+);
+@import "../../node_modules/bootstrap/scss/functions";
+@import "../../node_modules/bootstrap/scss/variables";
+@import "../../node_modules/bootstrap/scss/mixins";
+

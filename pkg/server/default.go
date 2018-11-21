@@ -24,8 +24,8 @@ type container interface {
 	ViewsHandler() http.HandlerFunc
 }
 
-// CreateServerInstance factory func
-// for create new server
+// CreateServerInstance factory
+// for create new server ja
 func CreateServerInstance(ctx container) *gin.Engine {
 	r := gin.Default()
 	r.Use(ctx.Middlewares().SessionTokenValidate.Handler())

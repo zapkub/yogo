@@ -44,3 +44,15 @@
 [[constraint]]
   name = "github.com/99designs/gqlgen"
   branch = "master"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/tomnomnom/globwatch"
+
+[[constraint]]
+  name = "github.com/radovskyb/watcher"
+  version = "1.0.2"
+
+[[constraint]]
+  name = "github.com/zapkub/gorogoso"
+  revision = "fc3f10d"
