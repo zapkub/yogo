@@ -47,7 +47,7 @@ func developmentRunner() {
 		views := exec.Command("make", "start-views")
 		cmdLogHandler(views)
 	}()
-	server := exec.Command("go", "run", "./pkg/bootstrap/bootstrap.go")
+	server := exec.Command("go", "run", "./pkg/main.go")
 	cmdLogHandler(server)
 
 }

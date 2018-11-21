@@ -32,6 +32,10 @@ type YogoContainer struct {
 	viewsHandler             http.HandlerFunc
 }
 
+func (c *YogoContainer) Port() string {
+	return ":3000"
+}
+
 // Version return string of current API version
 func (c *YogoContainer) Version() string {
 	return c.version

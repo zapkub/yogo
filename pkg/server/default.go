@@ -34,6 +34,7 @@ func CreateServerInstance(ctx container) *gin.Engine {
 		userModel := ctx.Models().UserModel
 		user := userModel.Create()
 		user.Email = "rungsikorn@me.com"
+
 		result, err := user.Save()
 		if err != nil {
 			panic(err)
